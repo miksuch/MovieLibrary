@@ -4,7 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using MovieLibrary.Core.Repositories;
 using MovieLibrary.Data;
+using MovieLibrary.Data.Interfaces;
 
 namespace MovieLibrary.Api
 {
@@ -26,6 +28,9 @@ namespace MovieLibrary.Api
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Movie library API", Version = "v1" });
             });
+
+            services.AddScoped<IMovieRepository, MovieRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
