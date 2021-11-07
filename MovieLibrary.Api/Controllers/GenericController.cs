@@ -1,49 +1,49 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MovieLibrary.Core.Services;
 using MovieLibrary.Data.Interfaces;
 
 namespace MovieLibrary.Api.Controllers
 {
     [ApiController]
     [Route("v1/[controller]")]
-    public class GenericController<TEntity, TRepository> : Controller 
-        where TEntity : class
-        where TRepository : ICRUDRepository<TEntity>
+    public class GenericController<TDto> : Controller 
+        where TDto : class
     {
-        private readonly TRepository _repository;
+        protected readonly ICRUDService<TDto> _service;
 
-        public GenericController(TRepository repository)
+        public GenericController(ICRUDService<TDto> service)
         {
-            _repository = repository;
+            _service = service;
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Ok(_repository.Get(id));
+            return Ok(_service.Get(id));
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_repository.Get());
+            return Ok(_service.Get());
         }
 
         [HttpPut]
-        public IActionResult Update(TEntity entity)
+        public IActionResult Update(TDto entity)
         {
-            return Ok(_repository.Update(entity));
+            return Ok(_service.Update(entity));
         }
 
         [HttpPost]
-        public IActionResult Post(TEntity entity)
+        public IActionResult Post(TDto entity)
         {
-            return Ok(_repository.Add(entity));
+            return Ok(_service.Add(entity));
         }
 
         [HttpDelete("{id}")]
         public IActionResult Remove(int id)
         {
-            return Ok(_repository.Remove(id));
+            return Ok(_service.Remove(id));
         }
     }
 }
