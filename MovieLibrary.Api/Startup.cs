@@ -47,10 +47,7 @@ namespace MovieLibrary.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Movie library API");
             });
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseExceptionHandler("/Error");
 
             app.UseRouting();
 
