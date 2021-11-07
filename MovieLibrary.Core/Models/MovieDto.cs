@@ -32,7 +32,7 @@ namespace MovieLibrary.Core.Models
             result.Description = movieDto.Description;
             result.Year = movieDto.Year;
             result.ImdbRating = movieDto.ImdbRating;
-            foreach( var category in movieDto.Categories )
+            foreach (var category in movieDto.Categories)
             {
                 var movieCategory = new MovieCategory();
                 movieCategory.CategoryId = category.Id;

@@ -1,5 +1,4 @@
-﻿using MovieLibrary.Data.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MovieLibrary.Data.Interfaces
 {

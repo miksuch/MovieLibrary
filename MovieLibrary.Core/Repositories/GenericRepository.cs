@@ -2,7 +2,6 @@
 using MovieLibrary.Data;
 using MovieLibrary.Data.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MovieLibrary.Core.Repositories
 {

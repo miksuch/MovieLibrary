@@ -33,7 +33,7 @@ namespace MovieLibrary.Core.Repositories
         public IQueryable<Movie> FilterByTitle(IQueryable<Movie> movies, string title) =>
            movies.Where(movie => movie.Title.ToLower().Contains(title.ToLower()));
 
-        public IQueryable<Movie> FilterByCategories(IQueryable<Movie> movies, IEnumerable<Category> categories) => 
+        public IQueryable<Movie> FilterByCategories(IQueryable<Movie> movies, IEnumerable<Category> categories) =>
             movies.AsEnumerable().Where(movie =>
             categories.ToList()
             .Exists(filterCategory => movie.MovieCategories.ToList()
@@ -45,8 +45,8 @@ namespace MovieLibrary.Core.Repositories
                 movie.ImdbRating >= minRating);
             if (maxRating != default)
             {
-               movies = movies.Where(movie =>
-               movie.ImdbRating <= maxRating);
+                movies = movies.Where(movie =>
+                movie.ImdbRating <= maxRating);
             }
             return movies;
         }
@@ -81,13 +81,13 @@ namespace MovieLibrary.Core.Repositories
             if (!string.IsNullOrEmpty(title))
                 result = FilterByTitle(result, title);
 
-            if ( categories != null && categories.Any())
+            if (categories != null && categories.Any())
                 result = FilterByCategories(result, categories);
 
             result = FilterByRating(result, minRating, maxRating);
 
             result = GetPage(result, startId, limit);
-            
+
             return result;
         }
 
@@ -98,12 +98,12 @@ namespace MovieLibrary.Core.Repositories
                 .Where(movieCategory => movieCategory.MovieId == entity.Id);
 
             var updateList = new List<MovieCategory>();
-            foreach( var entityCategory in entity.MovieCategories)
+            foreach (var entityCategory in entity.MovieCategories)
             {
                 if (dbCategories
                     .FirstOrDefault(
                     dbCategory => dbCategory.CategoryId == entityCategory.CategoryId)
-                    == null )
+                    == null)
                 {
                     updateList.Add(entityCategory);
                 }

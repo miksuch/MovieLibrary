@@ -9,7 +9,7 @@ namespace MovieLibrary.Core.Services.Implementations
         public IEnumerable<CategoryDto> Map(IEnumerable<Category> entities)
         {
             var mappedEntities = new List<CategoryDto>();
-            foreach(var entity in entities)
+            foreach (var entity in entities)
             {
                 mappedEntities.Add(Map(entity));
             }

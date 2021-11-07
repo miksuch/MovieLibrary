@@ -1,8 +1,6 @@
 ﻿using MovieLibrary.Core.Models;
 using MovieLibrary.Data.Entities;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MovieLibrary.Core.Services.Implementations
 {

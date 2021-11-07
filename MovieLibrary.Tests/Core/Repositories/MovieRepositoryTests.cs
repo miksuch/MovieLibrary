@@ -52,8 +52,8 @@ namespace MovieLibrary.Tests.Core.Repositories
 
             return new List<object[]>
             {
-                new object[] 
-                { 
+                new object[]
+                {
                     new List<Movie>
                     {
                         movie1,
@@ -84,7 +84,7 @@ namespace MovieLibrary.Tests.Core.Repositories
                 var result = movieRepository.FilterByCategories(context.Movies, categories).ToList();
 
                 Assert.Equal(expectedResult.Count, result.Count);
-                foreach(var expectedItem in expectedResult )
+                foreach (var expectedItem in expectedResult)
                 {
                     Assert.Contains(result, resultFragment => resultFragment.Id == expectedItem.Id);
                 }

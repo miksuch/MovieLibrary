@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieLibrary.Core.Services;
-using MovieLibrary.Data.Interfaces;
 
 namespace MovieLibrary.Api.Controllers
 {
     [ApiController]
     [Route("v1/[controller]")]
-    public class GenericController<TDto> : Controller 
+    public class GenericController<TDto> : Controller
         where TDto : class
     {
         protected readonly ICRUDService<TDto> _service;

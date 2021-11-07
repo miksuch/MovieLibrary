@@ -16,7 +16,7 @@ namespace MovieLibrary.Api.Controllers
         }
 
         [HttpGet("/v1/Movie/Filter")]
-        public IActionResult Get( 
+        public IActionResult Get(
             string title,
             [FromQuery] List<int> categoriesIds,
             decimal minRating, decimal maxRating,
