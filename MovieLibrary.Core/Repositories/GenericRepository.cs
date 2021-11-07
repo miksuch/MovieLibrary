@@ -8,31 +8,31 @@ namespace MovieLibrary.Core.Repositories
 {
     public class GenericRepository<TEntity> : ICRUDRepository<TEntity> where TEntity : class
     {
-        private readonly MovieLibraryContext _dbContext;
+        protected readonly MovieLibraryContext _dbContext;
 
         public GenericRepository(MovieLibraryContext dbContext)
         {
-            _dbContext = dbContext;
+            this._dbContext = dbContext;
         }
 
-        public TEntity Add(TEntity entity)
+        public virtual TEntity Add(TEntity entity)
         {
-            var result = _dbContext.Add(entity).Entity;
+            var resultEntry = _dbContext.Attach(entity);
             _dbContext.SaveChanges();
-            return result;
+            return resultEntry.Entity;
         }
 
-        public IEnumerable<TEntity> Get()
+        public virtual IEnumerable<TEntity> Get()
         {
-            return _dbContext.Set<TEntity>().AsNoTracking().ToList();
+            return _dbContext.Set<TEntity>().AsNoTracking();
         }
 
-        public TEntity Get(int id)
+        public virtual TEntity Get(int id)
         {
             return _dbContext.Set<TEntity>().Find(id);
         }
 
-        public TEntity Remove(int id)
+        public virtual TEntity Remove(int id)
         {
             var result = _dbContext.Set<TEntity>().Find(id);
             if (result != null)
@@ -43,11 +43,11 @@ namespace MovieLibrary.Core.Repositories
             return result;
         }
 
-        public TEntity Update(TEntity entity)
+        public virtual TEntity Update(TEntity entity)
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
+            var result = _dbContext.Update(entity);
             _dbContext.SaveChanges();
-            return entity;
+            return result.Entity;
         }
     }
 }

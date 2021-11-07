@@ -4,8 +4,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using MovieLibrary.Core.Models;
 using MovieLibrary.Core.Repositories;
+using MovieLibrary.Core.Services;
+using MovieLibrary.Core.Services.Implementations;
 using MovieLibrary.Data;
+using MovieLibrary.Data.Entities;
 using MovieLibrary.Data.Interfaces;
 
 namespace MovieLibrary.Api
@@ -31,6 +35,8 @@ namespace MovieLibrary.Api
 
             services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<ICategoryService, CategoryService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
