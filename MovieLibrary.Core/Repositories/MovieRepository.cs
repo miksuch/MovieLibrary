@@ -34,10 +34,10 @@ namespace MovieLibrary.Core.Repositories
            movies.Where(movie => movie.Title.ToLower().Contains(title.ToLower()));
 
         public IQueryable<Movie> FilterByCategories(IQueryable<Movie> movies, IEnumerable<Category> categories) => 
-            movies.Where(movie =>
+            movies.AsEnumerable().Where(movie =>
             categories.ToList()
             .Exists(filterCategory => movie.MovieCategories.ToList()
-            .Exists(movieCategory => movieCategory.CategoryId == filterCategory.Id)));
+            .Exists(movieCategory => movieCategory.CategoryId == filterCategory.Id))).AsQueryable();
 
         public IQueryable<Movie> FilterByRating(IQueryable<Movie> movies, decimal minRating, decimal maxRating)
         {
@@ -81,7 +81,7 @@ namespace MovieLibrary.Core.Repositories
             if (!string.IsNullOrEmpty(title))
                 result = FilterByTitle(result, title);
 
-            if (categories.Any())
+            if ( categories != null && categories.Any())
                 result = FilterByCategories(result, categories);
 
             result = FilterByRating(result, minRating, maxRating);
